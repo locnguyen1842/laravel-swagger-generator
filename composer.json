@@ -1,0 +1,24 @@
+{
+    "name": "locnguyen1842/laravel-swagger-generator",
+    "description": "AN tool to generate swagger json from laravel validation rules",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "locnguyen1842",
+            "email": "locnguyen1842@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^6.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "LrvSwagger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LrvSwagger\\Tests\\": "tests"
+        }
+    }
+}
