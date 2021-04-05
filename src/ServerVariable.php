@@ -4,6 +4,8 @@ namespace LrvSwagger;
 
 class ServerVariable
 {
+    public $name;
+
     public $default;
 
     /** @var string[]|null */
@@ -11,11 +13,37 @@ class ServerVariable
 
     public $description = '';
 
-    public function __construct($default, $enum = null, $description = '')
+    public function __construct($name, $default, $enum = null, $description = '')
     {
+        $this->name = $name;
         $this->default = $default;
         $this->enum = $enum;
         $this->description = $description;
+    }
+
+    public static function create($name, $default, $enum = null, $description = '')
+    {
+        return new static($name, $default, $enum, $description);
+    }
+
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     /**

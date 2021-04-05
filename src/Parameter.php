@@ -35,6 +35,17 @@ class Parameter
         $this->allowEmptyValue = $allowEmptyValue;
     }
 
+    public static function create(
+        $name,
+        $in = 'query',
+        $required = false,
+        $description = '',
+        $deprecated = false,
+        $allowEmptyValue = false
+    ) {
+        return new static($name, $in, $required, $description, $deprecated, $allowEmptyValue);
+    }
+
     /**
      * Get the value of name
      */ 

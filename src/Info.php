@@ -19,19 +19,30 @@ class Info
     public $license = null;
 
     public function __construct(
-        $title,
-        $version = '1.0',
-        $description = '',
-        $termsOfService = null,
-        $contact = null,
-        $license = null
+        string $title,
+        string $description = '',
+        string $version = '1.0',
+        string $termsOfService = null,
+        Contact $contact = null,
+        License $license = null
     ) {
         $this->title = $title;
         $this->description = $description;
-        $this->termsOfService = $termsOfService;
         $this->version = $version;
+        $this->termsOfService = $termsOfService;
         $this->contact = $contact;
         $this->license = $license;
+    }
+
+    public static function create(
+        string $title,
+        string $description = '',
+        string $version = '1.0',
+        string $termsOfService = null,
+        Contact $contact = null,
+        License $license = null
+    ) {
+        return new static($title, $description, $version, $termsOfService, $contact, $license);
     }
 
     /**
@@ -47,7 +58,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -67,7 +78,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setVersion($version)
+    public function setVersion(string $version)
     {
         $this->version = $version;
 
@@ -87,7 +98,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -107,7 +118,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setTermsOfService($termsOfService)
+    public function setTermsOfService(string $termsOfService)
     {
         $this->termsOfService = $termsOfService;
 
@@ -127,7 +138,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setContact($contact)
+    public function setContact(Contact $contact)
     {
         $this->contact = $contact;
 
@@ -147,7 +158,7 @@ class Info
      *
      * @return  self
      */ 
-    public function setLicense($license)
+    public function setLicense(License $license)
     {
         $this->license = $license;
 

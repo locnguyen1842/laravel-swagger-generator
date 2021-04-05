@@ -4,19 +4,6 @@ namespace LrvSwagger;
 
 class Operation
 {
-    const AVAILABLE_TYPES = [
-        'get',
-        'put',
-        'post',
-        'delete',
-        'options',
-        'head',
-        'patch',
-        'trace',
-    ];
-
-    public $type = 'get';
-
     public $tags = [];
 
     public $summary = '';
@@ -35,9 +22,7 @@ class Operation
     public $requestBody = null;
 
     /** @var Response[]|array */
-    public $responses = [
-        200 => ['description' => 'Success'],
-    ];
+    public $responses = [];
 
     public $deprecated = false;
 
@@ -50,49 +35,57 @@ class Operation
     // public $callbacks = null;
 
     public function __construct(
-        $type = 'get',
-        $tags = [],
-        $summary = '',
-        $description = '',
-        $externalDocs = null,
-        $operationId = null,
-        $parameters = null,
-        $requestBody = null,
-        $responses = [],
-        $deprecated = false,
-        $security = null,
-        $servers = null
+        Response $response,
+        array $tags = [],
+        string $summary = '',
+        string $description = '',
+        ExternalDocs $externalDocs = null,
+        string $operationId = null,
+        RequestBody $requestBody = null,
+        bool $deprecated = false,
+        SecurityRequirement $security = null
     ) {
-        $this->type = $type;
+        $this->responses[] = $response;
         $this->tags = $tags;
         $this->summary = $summary;
         $this->description = $description;
         $this->externalDocs = $externalDocs;
         $this->operationId = $operationId;
-        $this->parameters = $parameters;
         $this->requestBody = $requestBody;
-        $this->responses = ! empty($responses) ? $responses : $this->responses;
         $this->deprecated = $deprecated;
         $this->security = $security;
-        $this->servers = $servers;
+    }
+
+    public static function create(
+        Response $response,
+        array $tags = [],
+        string $summary = '',
+        string $description = '',
+        ExternalDocs $externalDocs = null,
+        string $operationId = null,
+        RequestBody $requestBody = null,
+        bool $deprecated = false,
+        SecurityRequirement $security = null
+    ) {
+        return new static($response, $tags, $summary, $description, $externalDocs, $operationId, $requestBody, $deprecated, $security);
     }
 
     /**
-     * Get the value of type
+     * Get the value of responses
      */ 
-    public function getType()
+    public function getResponses()
     {
-        return $this->type;
+        return $this->responses;
     }
 
     /**
-     * Set the value of type
+     * Set the value of responses
      *
      * @return  self
      */ 
-    public function setType($type)
+    public function addResponse(Response $response)
     {
-        $this->type = $type;
+        $this->responses[] = $response;
 
         return $this;
     }
@@ -110,9 +103,21 @@ class Operation
      *
      * @return  self
      */ 
-    public function setTags($tags)
+    public function setTags(array $tags)
     {
         $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of tags
+     *
+     * @return  self
+     */ 
+    public function addTag(string $tag)
+    {
+        $this->tags[] = $tag;
 
         return $this;
     }
@@ -130,7 +135,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setSummary($summary)
+    public function setSummary(string $summary)
     {
         $this->summary = $summary;
 
@@ -150,7 +155,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -170,7 +175,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setExternalDocs($externalDocs)
+    public function setExternalDocs(ExternalDocs $externalDocs)
     {
         $this->externalDocs = $externalDocs;
 
@@ -190,7 +195,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setOperationId($operationId)
+    public function setOperationId(string $operationId)
     {
         $this->operationId = $operationId;
 
@@ -210,9 +215,9 @@ class Operation
      *
      * @return  self
      */ 
-    public function setParameters($parameters)
+    public function addParameter(Parameter $parameter)
     {
-        $this->parameters = $parameters;
+        $this->parameters[] = $parameter;
 
         return $this;
     }
@@ -230,29 +235,9 @@ class Operation
      *
      * @return  self
      */ 
-    public function setRequestBody($requestBody)
+    public function setRequestBody(RequestBody $requestBody)
     {
         $this->requestBody = $requestBody;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of responses
-     */ 
-    public function getResponses()
-    {
-        return $this->responses;
-    }
-
-    /**
-     * Set the value of responses
-     *
-     * @return  self
-     */ 
-    public function setResponses($responses)
-    {
-        $this->responses = $responses;
 
         return $this;
     }
@@ -270,7 +255,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setDeprecated($deprecated)
+    public function setDeprecated(bool $deprecated)
     {
         $this->deprecated = $deprecated;
 
@@ -290,7 +275,7 @@ class Operation
      *
      * @return  self
      */ 
-    public function setSecurity($security)
+    public function setSecurity(SecurityRequirement $security)
     {
         $this->security = $security;
 
@@ -310,9 +295,9 @@ class Operation
      *
      * @return  self
      */ 
-    public function setServers($servers)
+    public function addServer(Server $server)
     {
-        $this->servers = $servers;
+        $this->servers[] = $server;
 
         return $this;
     }

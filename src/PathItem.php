@@ -4,6 +4,19 @@ namespace LrvSwagger;
 
 class PathItem
 {
+    const AVAILABLE_TYPES = [
+        'get',
+        'put',
+        'post',
+        'delete',
+        'options',
+        'head',
+        'patch',
+        'trace',
+    ];
+
+    public $type = 'get';
+
     /** @var Operation */
     public $operation;
 
@@ -11,11 +24,47 @@ class PathItem
 
     public $summary = '';
 
-    public function __construct(Operation $operation, $description = null, $summary = '')
+    public function __construct(string $type, Operation $operation, string $description = '', string $summary = '')
     {
+        $this->type = $this->checkType($type);
         $this->operation = $operation;
         $this->description = $description;
         $this->summary = $summary;
+    }
+
+    public static function create(string $type, Operation $operation, string $description = '', string $summary = '')
+    {
+        return new static($type, $operation, $description, $summary);
+    }
+
+
+    public function checkType($type)
+    {
+        if(! in_array($type, self::AVAILABLE_TYPES)) {
+            throw new \Exception('Unavailable value for "type" field');
+        }
+
+        return $type;
+    }
+
+    /**
+     * Get the value of type
+     */ 
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @return  self
+     */ 
+    public function setType(string $type)
+    {
+        $this->type = $this->checkType($type);
+
+        return $this;
     }
 
     /**
@@ -31,7 +80,7 @@ class PathItem
      *
      * @return  self
      */ 
-    public function setOperation($operation)
+    public function setOperation(Operation $operation)
     {
         $this->operation = $operation;
 
@@ -51,7 +100,7 @@ class PathItem
      *
      * @return  self
      */ 
-    public function setDescription(Operation $description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -71,7 +120,7 @@ class PathItem
      *
      * @return  self
      */ 
-    public function setSummary($summary)
+    public function setSummary(string $summary)
     {
         $this->summary = $summary;
 

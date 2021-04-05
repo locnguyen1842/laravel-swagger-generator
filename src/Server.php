@@ -5,17 +5,21 @@ namespace LrvSwagger;
 class Server
 {
     public $url;
-
-    /** @var ServerVariable[]|null */
-    public $variables = null;
-
+    
     public $description = '';
 
-    public function __construct($url = '', $variables = null, $description = '')
+    /** @var ServerVariable[]|null */
+    public $variables;
+
+    public function __construct($url = '',$description = '', $variables = null)
     {
         $this->url = $url;
-        $this->variables = $variables;
         $this->description = $description;
+        $this->variables = $variables;
+    }
+
+    public static function create($url = '',$description = '') {
+        return new static($url, $description);
     }
 
     /**
@@ -51,9 +55,21 @@ class Server
      *
      * @return  self
      */ 
-    public function setVariables(ServerVariable $variables)
+    public function setVariables(ServerVariable $variable)
     {
-        $this->variables = $variables;
+        $this->variables[] = $variable;
+
+        return $this;
+    }
+
+    /**
+     * Add the server variable
+     *
+     * @return  self
+     */ 
+    public function addVariable(ServerVariable $variable)
+    {
+        $this->variables[] = $variable;
 
         return $this;
     }

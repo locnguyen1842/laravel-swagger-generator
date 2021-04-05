@@ -14,10 +14,14 @@ class Response
 
     // public $links = [];
 
-    public function __construct($code = '200', $description = 'Response')
+    public function __construct(string $code = '200',string $description = 'Response')
     {
-        $this->code = (string) $code;
+        $this->code = $code;
         $this->description = $description;
+    }
+
+    public static function create(string $code = '200',string $description = 'Response') {
+        return new static($code, $description);
     }
 
     /**
@@ -53,7 +57,7 @@ class Response
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
