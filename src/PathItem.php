@@ -11,7 +11,8 @@ class PathItem
 
     public $summary = '';
 
-    public function __construct(Operation $operation, $description = null, $summary = '') {
+    public function __construct(Operation $operation, $description = null, $summary = '')
+    {
         $this->operation = $operation;
         $this->description = $description;
         $this->summary = $summary;

@@ -18,7 +18,8 @@ class StringType extends AbstractType
 
     public $format;
 
-    public function __construct($format = '') {
+    public function __construct($format = '')
+    {
         $this->format = $format;
     }
 

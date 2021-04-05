@@ -16,8 +16,14 @@ class OpenApi
 
     public $externalDocs;
 
-    public function __construct($version = '3.0.0', $info = [], $servers = [], $paths = [], $components = [], $externalDocs = [])
-    {
+    public function __construct(
+        $info = [],
+        $servers = [],
+        $paths = [],
+        $components = [],
+        $externalDocs = [],
+        $version = '3.0.0'
+    ) {
         $this->openapi = $version;
         $this->info = $info;
         $this->servers = $servers;

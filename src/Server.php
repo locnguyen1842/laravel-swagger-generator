@@ -11,7 +11,8 @@ class Server
 
     public $description = '';
 
-    public function __construct($url = '', $variables = null, $description = '') {
+    public function __construct($url = '', $variables = null, $description = '')
+    {
         $this->url = $url;
         $this->variables = $variables;
         $this->description = $description;

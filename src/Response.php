@@ -2,34 +2,40 @@
 
 namespace LrvSwagger;
 
-class ExternalDocs
+class Response
 {
-    public $url;
+    public $code = '200';
 
-    public $description = '';
+    public $description = 'Response';
 
-    public function __construct($url, $description = '')
+    // public $headers = [];
+
+    // public $content = [];
+
+    // public $links = [];
+
+    public function __construct($code = '200', $description = 'Response')
     {
-        $this->url = $url;
+        $this->code = (string) $code;
         $this->description = $description;
     }
 
     /**
-     * Get the value of url
+     * Get the value of code
      */ 
-    public function getUrl()
+    public function getCode()
     {
-        return $this->url;
+        return $this->code;
     }
 
     /**
-     * Set the value of url
+     * Set the value of code
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setCode(string $code)
     {
-        $this->url = $url;
+        $this->code = $code;
 
         return $this;
     }

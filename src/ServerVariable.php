@@ -11,7 +11,8 @@ class ServerVariable
 
     public $description = '';
 
-    public function __construct($default, $enum = null, $description = '') {
+    public function __construct($default, $enum = null, $description = '')
+    {
         $this->default = $default;
         $this->enum = $enum;
         $this->description = $description;

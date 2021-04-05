@@ -4,66 +4,77 @@ namespace LrvSwagger;
 
 class RequestBody
 {
-    public $description;
+    /** @var MediaType[] */
+    public $content = [];
 
-    public $required;
+    public $required = false;
 
-    public $content;
+    public $description = '';
 
-    public function __construct($content, $required = true, $description = '')
+    public function __construct($content = [], $required = false, $description = '')
     {
         $this->content = $content;
         $this->required = $required;
         $this->description = $description;
     }
 
-    public static function create($content, $required = true, $description = '')
+    /**
+     * Get the value of content
+     */ 
+    public function getContent()
     {
-        $instance = new static($content);
-        $instance->required = $required;
-        $instance->description = $description;
-
-        return $instance;
+        return $this->content;
     }
 
-    public function getDescription()
+    /**
+     * Set the value of content
+     *
+     * @return  self
+     */ 
+    public function setContent($content)
     {
-        return $this->description;
-    }
-
-    public function setDescription($description)
-    {
-        $this->description = $description;
+        $this->content = $content;
 
         return $this;
     }
 
+    /**
+     * Get the value of required
+     */ 
     public function getRequired()
     {
         return $this->required;
     }
 
-    public function setRequired($required)
+    /**
+     * Set the value of required
+     *
+     * @return  self
+     */ 
+    public function setRequired(bool $required)
     {
         $this->required = $required;
 
         return $this;
     }
 
-    public function getContent()
+    /**
+     * Get the value of description
+     */ 
+    public function getDescription()
     {
-        return $this->content;
+        return $this->description;
     }
 
-    public function setContent($requestBodyContent)
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
     {
-        $this->content = $requestBodyContent;
+        $this->description = $description;
 
         return $this;
-    }
-
-    public function __toArray()
-    {
-        return array_filter(call_user_func('object_to_array_recursive', $this), '_remove_empty_internal');
     }
 }

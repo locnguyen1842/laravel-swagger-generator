@@ -2,15 +2,16 @@
 
 namespace LrvSwagger;
 
-class License
+class SecurityRequirement
 {
-    public $name = '';
+    public $name = null;
 
-    public $url = '';
+    public $scopes = [];
 
-    public function __construct($name = '', $url = '') {
+    public function __construct($name = null, $scopes = [])
+    {
         $this->name = $name;
-        $this->url = $url;
+        $this->scopes = $scopes;
     }
 
     /**
@@ -34,21 +35,21 @@ class License
     }
 
     /**
-     * Get the value of url
+     * Get the value of scopes
      */ 
-    public function getUrl()
+    public function getScopes()
     {
-        return $this->url;
+        return $this->scopes;
     }
 
     /**
-     * Set the value of url
+     * Set the value of scopes
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setScopes($scopes)
     {
-        $this->url = $url;
+        $this->scopes = $scopes;
 
         return $this;
     }

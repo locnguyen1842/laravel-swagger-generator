@@ -10,7 +10,8 @@ class Contact
 
     public $email = '';
 
-    public function __construct($name = '', $url = '', $email = '') {
+    public function __construct($name = '', $url = '', $email = '')
+    {
         $this->name = $name;
         $this->url = $url;
         $this->email = $email;

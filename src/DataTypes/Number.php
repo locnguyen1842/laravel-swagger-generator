@@ -12,7 +12,8 @@ class Number extends AbstractType
 
     public $format;
 
-    public function __construct($format = null) {
+    public function __construct($format = null)
+    {
         $this->format = $format ?? self::FLOAT;
     }
 
