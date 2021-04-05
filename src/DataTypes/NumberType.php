@@ -2,7 +2,7 @@
 
 namespace LrvSwagger\DataTypes;
 
-class Number extends AbstractType
+class NumberType extends AbstractType
 {
     const FLOAT = 'float';
 

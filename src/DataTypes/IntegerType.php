@@ -2,7 +2,7 @@
 
 namespace LrvSwagger\DataTypes;
 
-class Integer extends AbstractType
+class IntegerType extends AbstractType
 {
     const INT32 = 'int32';
 

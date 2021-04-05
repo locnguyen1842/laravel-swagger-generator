@@ -4,6 +4,8 @@ namespace LrvSwagger;
 
 class Parameter
 {
+    const AVAILABLE_IN = ['query', 'header', 'path', 'cookie'];
+
     public $name;
 
     public $in = 'query';
@@ -26,7 +28,7 @@ class Parameter
 
     ) {
         $this->name = $name;
-        $this->in = $in;
+        $this->in = $this->checkFieldIn($in);
         $this->required = $required;
         $this->description = $description;
         $this->deprecated = $deprecated;
@@ -68,9 +70,17 @@ class Parameter
      */ 
     public function setIn($in)
     {
-        $this->in = $in;
+        $this->in = $this->checkFieldIn($in);
 
         return $this;
+    }
+
+    private function checkFieldIn($in) {
+        if(! in_array($in, self::AVAILABLE_IN)) {
+            throw new \Exception('Unavailable value for "in" field');
+        }
+
+        return $in;
     }
 
     /**

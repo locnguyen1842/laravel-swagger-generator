@@ -2,7 +2,7 @@
 
 namespace LrvSwagger\DataTypes;
 
-class Boolean extends AbstractType
+class BooleanType extends AbstractType
 {
     private $type = 'boolean';
 
