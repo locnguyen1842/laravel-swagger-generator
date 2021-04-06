@@ -8,10 +8,15 @@ class ExternalDocs
 
     public $description = '';
 
-    public function __construct($url, $description = '')
+    public function __construct(string $url, string $description = '')
     {
         $this->url = $url;
         $this->description = $description;
+    }
+
+    public static function create(string $url, string $description = '')
+    {
+        return new static($url, $description);
     }
 
     /**
@@ -27,7 +32,7 @@ class ExternalDocs
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
 
@@ -47,7 +52,7 @@ class ExternalDocs
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 

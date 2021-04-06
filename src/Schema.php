@@ -2,8 +2,12 @@
 
 namespace LrvSwagger;
 
+use LrvSwagger\DataTypes\AbstractType;
+
 class Schema
 {
+    public $property;
+
     public $example = '';
 
     public $nullable = false;
@@ -20,14 +24,16 @@ class Schema
     public $deprecated = false;
 
     public function __construct(
-        $example = '',
-        $nullable = false,
-        $readOnly = false,
-        $writeOnly = false,
+        Property $property,
+        string $example = '',
+        bool $nullable = false,
+        bool $readOnly = false,
+        bool $writeOnly = false,
         $xml = null,
-        $externalDocs = null,
-        $deprecated = false
+        ExternalDocs $externalDocs = null,
+        bool $deprecated = false
     ) {
+        $this->property = $property;
         $this->example = $example;
         $this->nullable = $nullable;
         $this->readOnly = $readOnly;
@@ -35,6 +41,28 @@ class Schema
         $this->xml = $xml;
         $this->externalDocs = $externalDocs;
         $this->deprecated = $deprecated;
+    }
+
+    public static function create(
+        Property $property,
+        string $example = '',
+        bool $nullable = false,
+        bool $readOnly = false,
+        bool $writeOnly = false,
+        $xml = null,
+        ExternalDocs $externalDocs = null,
+        bool $deprecated = false
+    ) {
+        return new static($property, $example, $nullable, $readOnly, $writeOnly, $xml, $externalDocs, $deprecated);
+    }
+
+    public static function createFromArray(array $attributes = [])
+    {
+        $property = Property::parseRecursiveFromArray([null => $attributes])[0];
+
+        $schemaInstance = static::create($property);
+
+        return $schemaInstance;
     }
 
     /**
@@ -50,7 +78,7 @@ class Schema
      *
      * @return  self
      */ 
-    public function setExample($example)
+    public function setExample(string $example)
     {
         $this->example = $example;
 

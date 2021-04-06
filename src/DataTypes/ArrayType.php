@@ -1,14 +1,14 @@
 <?php
 
-namespace LrvSwagger\SchemaTypes;
+namespace LrvSwagger\DataTypes;
 
 class ArrayType extends AbstractType
 {
-    private $type = 'array';
+    private $type = self::ARRAY_TYPE;
 
     public $items = [];
 
-    public function __construct($items = [])
+    public function __construct(array $items = [])
     {
         $this->items = $items;
     }
@@ -31,7 +31,7 @@ class ArrayType extends AbstractType
      *
      * @return  self
      */ 
-    public function setItems($items)
+    public function setItems(array $items)
     {
         $this->items = $items;
 

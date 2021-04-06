@@ -26,8 +26,8 @@ class Operation
 
     public $deprecated = false;
 
-    /** @var SecurityRequirement|null */
-    public $security = null;
+    /** @var SecurityRequirement[]|null */
+    public $security = [];
 
     /** @var Server[]|null */
     public $servers = null;
@@ -42,8 +42,7 @@ class Operation
         ExternalDocs $externalDocs = null,
         string $operationId = null,
         RequestBody $requestBody = null,
-        bool $deprecated = false,
-        SecurityRequirement $security = null
+        bool $deprecated = false
     ) {
         $this->responses[] = $response;
         $this->tags = $tags;
@@ -53,7 +52,6 @@ class Operation
         $this->operationId = $operationId;
         $this->requestBody = $requestBody;
         $this->deprecated = $deprecated;
-        $this->security = $security;
     }
 
     public static function create(
@@ -64,10 +62,9 @@ class Operation
         ExternalDocs $externalDocs = null,
         string $operationId = null,
         RequestBody $requestBody = null,
-        bool $deprecated = false,
-        SecurityRequirement $security = null
+        bool $deprecated = false
     ) {
-        return new static($response, $tags, $summary, $description, $externalDocs, $operationId, $requestBody, $deprecated, $security);
+        return new static($response, $tags, $summary, $description, $externalDocs, $operationId, $requestBody, $deprecated);
     }
 
     /**
@@ -215,6 +212,18 @@ class Operation
      *
      * @return  self
      */ 
+    public function setParameter(array $parameters)
+    {
+        $this->parameters = $parameters;
+
+        return $this;
+    }
+
+    /**
+     * Add the value to parameters
+     *
+     * @return  self
+     */ 
     public function addParameter(Parameter $parameter)
     {
         $this->parameters[] = $parameter;
@@ -275,9 +284,21 @@ class Operation
      *
      * @return  self
      */ 
-    public function setSecurity(SecurityRequirement $security)
+    public function setSecurity(array $security)
     {
-        $this->security = $security;
+        $this->security[] = $security;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of security
+     *
+     * @return  self
+     */ 
+    public function addSecurity(SecurityRequirement $security)
+    {
+        $this->security[] = $security;
 
         return $this;
     }

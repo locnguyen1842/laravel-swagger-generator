@@ -14,7 +14,7 @@ class StringType extends AbstractType
 
     const PASSWORD = 'password';
 
-    private $type = 'string';
+    private $type = self::STRING_TYPE;
 
     public $format;
 

@@ -9,17 +9,31 @@ class MediaType
     /** @var Schema */
     public $schema;
 
-    public $example = '';
+    public $example = null;
 
     // public $examples = null;
 
     // public $encoding = null;
 
-    public function __construct($schema, $example = '', $type = 'application/json')
+    public function __construct(Schema $schema, $example = null,string $type = 'application/json')
     {
         $this->schema = $schema;
         $this->example = $example;
         $this->type = $type;
+    }
+
+    public static function create(Schema $schema, $example = null,string $type = 'application/json')
+    {
+        return new static($schema, $example, $type);
+    }
+
+    public static function createFromArray(array $attributes = [])
+    {
+        $type = array_key_first($attributes);
+        $example = $attributes[$type]['example'] ?? null;
+        $schema = Schema::createFromArray($attributes[$type]['schema'] ?? []);
+
+        return new static($schema, $example, $type);
     }
 
     /**
@@ -35,7 +49,7 @@ class MediaType
      *
      * @return  self
      */ 
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
 
@@ -55,7 +69,7 @@ class MediaType
      *
      * @return  self
      */ 
-    public function setSchema($schema)
+    public function setSchema(Schema $schema)
     {
         $this->schema = $schema;
 

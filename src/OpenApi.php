@@ -25,23 +25,20 @@ class OpenApi
 
     public function __construct(
         Info $info,
-        Path $path,
         ExternalDocs $externalDocs = null,
         string $version = '3.0.0'
     ) {
         $this->info = $info;
-        $this->paths[] = $path;
         $this->externalDocs = $externalDocs;
         $this->openapi = $version;
     }
 
     public static function create(
         Info $info,
-        Path $path,
         ExternalDocs $externalDocs = null,
         string $version = '3.0.0'
     ) {
-        return new static($info, $path, $externalDocs, $version);
+        return new static($info, $externalDocs, $version);
     }
 
     /**
@@ -57,7 +54,7 @@ class OpenApi
      *
      * @return  self
      */ 
-    public function setOpenapi($openapi)
+    public function setOpenapi(string $openapi)
     {
         $this->openapi = $openapi;
 
@@ -77,7 +74,7 @@ class OpenApi
      *
      * @return  self
      */ 
-    public function setInfo($info)
+    public function setInfo(Info $info)
     {
         $this->info = $info;
 
@@ -97,9 +94,21 @@ class OpenApi
      *
      * @return  self
      */ 
-    public function setServers($servers)
+    public function setServers(array $servers)
     {
         $this->servers = $servers;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of servers
+     *
+     * @return  self
+     */ 
+    public function addServer(Server $server)
+    {
+        $this->servers[] = $server;
 
         return $this;
     }
@@ -129,7 +138,7 @@ class OpenApi
      *
      * @return  self
      */ 
-    public function addPath(PathItem $path)
+    public function addPath(Path $path)
     {
         $this->paths[] = $path;
 

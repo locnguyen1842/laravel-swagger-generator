@@ -4,18 +4,23 @@ namespace LrvSwagger;
 
 class RequestBody
 {
-    /** @var MediaType[] */
+    /** @var MediaType[]|array */
     public $content = [];
 
     public $required = false;
 
     public $description = '';
 
-    public function __construct($content = [], $required = false, $description = '')
+    public function __construct(array $content = [],bool $required = false,string $description = '')
     {
         $this->content = $content;
         $this->required = $required;
         $this->description = $description;
+    }
+
+    public static function create(array $content = [], bool $required = false, string $description = '')
+    {
+        return new static($content, $required, $description);
     }
 
     /**
@@ -31,7 +36,20 @@ class RequestBody
      *
      * @return  self
      */ 
-    public function setContent($content)
+    public function setContent(array $content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+
+    /**
+     * Set the value of content
+     *
+     * @return  self
+     */ 
+    public function addContent(MediaType $content)
     {
         $this->content = $content;
 
@@ -71,7 +89,7 @@ class RequestBody
      *
      * @return  self
      */ 
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 

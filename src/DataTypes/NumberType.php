@@ -8,7 +8,7 @@ class NumberType extends AbstractType
 
     const DOUBLE = 'double';
 
-    private $type = 'number';
+    private $type = self::NUMBER_TYPE;
 
     public $format;
 

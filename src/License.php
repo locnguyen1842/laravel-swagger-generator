@@ -8,10 +8,15 @@ class License
 
     public $url = '';
 
-    public function __construct($name = '', $url = '')
+    public function __construct(string $name = '',string $url = '')
     {
         $this->name = $name;
         $this->url = $url;
+    }
+
+    public static function create(string $name = '',string $url = '')
+    {
+        return new static($name, $url);
     }
 
     /**
@@ -27,7 +32,7 @@ class License
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -47,7 +52,7 @@ class License
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
 

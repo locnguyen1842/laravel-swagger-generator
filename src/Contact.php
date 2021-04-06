@@ -10,11 +10,16 @@ class Contact
 
     public $email = '';
 
-    public function __construct($name = '', $url = '', $email = '')
+    public function __construct(string $name = '',string $url = '',string $email = '')
     {
         $this->name = $name;
         $this->url = $url;
         $this->email = $email;
+    }
+
+    public static function create(string $name = '',string $url = '',string $email = '')
+    {
+        return new static($name, $url, $email);
     }
 
     /**
@@ -30,7 +35,7 @@ class Contact
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -50,7 +55,7 @@ class Contact
      *
      * @return  self
      */ 
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
 
@@ -70,7 +75,7 @@ class Contact
      *
      * @return  self
      */ 
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 

@@ -8,10 +8,15 @@ class SecurityRequirement
 
     public $scopes = [];
 
-    public function __construct($name = null, $scopes = [])
+    public function __construct($name = null,array $scopes = [])
     {
         $this->name = $name;
         $this->scopes = $scopes;
+    }
+
+    public static function create($name = null,array $scopes = [])
+    {
+        return new static($name, $scopes);
     }
 
     /**
@@ -47,9 +52,21 @@ class SecurityRequirement
      *
      * @return  self
      */ 
-    public function setScopes($scopes)
+    public function setScopes(array $scopes)
     {
         $this->scopes = $scopes;
+
+        return $this;
+    }
+
+    /**
+     * Add the value of scopes
+     *
+     * @return  self
+     */ 
+    public function addScope(string $scope)
+    {
+        $this->scopes[] = $scope;
 
         return $this;
     }

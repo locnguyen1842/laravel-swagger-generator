@@ -8,7 +8,7 @@ class IntegerType extends AbstractType
 
     const INT64 = 'int64';
 
-    private $type = 'integer';
+    private $type = self::INTEGER_TYPE;
 
     public $format;
 

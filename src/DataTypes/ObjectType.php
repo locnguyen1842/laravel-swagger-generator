@@ -1,10 +1,10 @@
 <?php
 
-namespace LrvSwagger\SchemaTypes;
+namespace LrvSwagger\DataTypes;
 
 class ObjectType extends AbstractType
 {
-    private $type = 'object';
+    private $type = self::OBJECT_TYPE;
 
     public $properties = [];
 

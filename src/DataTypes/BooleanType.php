@@ -4,7 +4,7 @@ namespace LrvSwagger\DataTypes;
 
 class BooleanType extends AbstractType
 {
-    private $type = 'boolean';
+    private $type = self::BOOLEAN_TYPE;
 
     public function getType(): string
     {
